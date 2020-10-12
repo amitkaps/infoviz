@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/react@16/umd/react.production.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.js" crossorigin></script>
+
+</head>
+
+
+
+<body>
+
+
+    <h1>Motion Example</h1>
+
+    <section></section>
+
+    <script type="module">
+
+        import { html, Component, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
+
+        import * as React from "react";
+        import { motion } from "framer-motion";
+        import { html } from 'htm/react';
+
+        export const Example = () => <motion.div animate={{ scale: 2 }} />;
+
+        ReactDOM.render(html`<a href="/">Hello!</a>`, document.body);
+
+
+    </script>
+
+</body>
+
+</html>

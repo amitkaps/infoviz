@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --spacing: 20px;
+
+  --basic-color: green;
+}
+
+html {
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header,
+footer,
+main {
+  margin: 4rem auto;
+}
+
+header h1 {
+  color: var(--basic-color);
+}
+
+/* Section -> Card */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+
+section {
+  width: 400px;
+  height: 400px;
+  padding: 10px;
+  margin: var(--spacing);
+}
+
+header h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul {
+  /* Positioning the Element */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*Box Model */
+  /* Margin - top , right, bottom, left */
+  margin: 20px 20px 20px 20px;
+}
+
+nav ul li {
+  display: inline-flex;
+  padding: 10px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a {
+  padding: 20px;
+}
