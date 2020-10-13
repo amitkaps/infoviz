@@ -1,80 +1,105 @@
 <!DOCTYPE html>
-<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Information Visualisation">
+<meta name="author" content="Amit Kapoor">
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>InfoVis</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="main.js"></script>
-</head>
+<title>InfoVis</title>
+<link rel="stylesheet" href="lib/style.css">
+<link rel="stylesheet" href="lib/monokai.css">
+<script src="lib/highlight.js"></script>
 
 <body>
 
+
   <header>
-    <h1>Info Visualisation</h1>
-    <nav>
-      <ul>
-        <li>
-          <a href="sketch.html">Generative</a>
-        </li>
-        <li>Manifesto</li>
-        <li>Critique</li>
-        <li>Project</li>
-        <li>Making of the Project</li>
-      </ul>
-    </nav>
+    <p><a href="\">home</a> | <a href="http://amitkaps.com"> amitkaps.com </a></p>
+    <h1> Information Visualisation</h1>
+    <div class="flex-grid">
+      <div class="col">
+        <h3> Basic </h3>
+        <ul>
+          <li><a href="#PageDesign">Page Design</a></li>
+          <li><a href="#HtmlChart">HTML Chart</a></li>
+          <!-- <li><a href="#filter">Filter &amp; Sort </a></li>
+          <li><a href="#summarize">Summarize</a></li>
+          <li><a href="#groupby">Groupby</a></li> -->
+        </ul>
+      </div>
+      <div class="col">
+        <h3> SVG </h3>
+        <ul>
+          <li><a href="#InlineSvg">Inline SVG</a></li>
+          <li><a href="#SvgChart">Svg Chart</a></li>
+          <!-- <li><a href="#scales">Scales</a></li>
+          <li><a href="#geo">Geo</a></li>
+          <li><a href="#treemap">Treemap</a></li> -->
+      </div>
+      <!-- <div class="col">
+        <h3>ANNOTATE</h3>
+        <ul>
+          <li><a href="#axes">Axes</a></li>
+          <li><a href="#labels">Labels</a></li>
+          <li><a href="#legends">Legends</a></li>
+          <li><a href="#story">Story</a></li>
+      </div>
+      <div class="col">
+        <h3>INTERACT</h3>
+        <ul>
+          <li><a href="#select">Selection</a></li>
+          <li><a href="#input">Input Bind</a></li>
+          <li><a href="#transition">Transition</a></li>
+          <li><a href="#motion">Motion</a></li>
+      </div> -->
+    </div>
   </header>
 
   <main>
-
-    <!-- Card Element for each section-->
-    <section>
-      <h2>Generative</h2>
-      <img src="/image/abstract.jpg" alt="Abstract Image " />
-      <p>Work done using p5.js</p>
+    <iframe sandbox="allow-popups allow-forms allow-same-origin" src="example/basic.html" id="frame" marginwidth="0"
+      marginheight="0" style="height:500px;width:960px;" scrolling="no"></iframe>
+    <h2 id="name"></h2>
+    <section class="raw">
+      <pre><code class="language-html" id="fileNode">
+        </code></pre>
     </section>
-
-    <section>
-      <h2>Manifesto</h2>
-      <img src="/image/abstract.jpg" alt="Abstract Image " />
-      <p>Work done using p5.js</p>
-    </section>
-
-
-    <section>
-      <h2>Critique</h2>
-      <img src="/image/abstract.jpg" alt="Abstract Image " />
-      <p>Work done using p5.js</p>
-    </section>
-
-    <section>
-      <h2>Project</h2>
-      <img src="/image/abstract.jpg" alt="Abstract Image " />
-      <p>Work done using p5.js</p>
-    </section>
-
-
-    <section>
-      <h2>Making</h2>
-      <img src="/image/abstract.jpg" alt="Abstract Image " />
-      <p>Work done using p5.js</p>
-    </section>
-
-
   </main>
 
+  <script>
 
-  <footer>
-    <a href="https://amitkaps.com">My Website</a>
-    <a href="https://twitter.com/amitkaps">My Twitter</a>
-    <a href="https://github.com/amitkaps">My Github</a>
-    <a href="https://linkedin.com/amitkaps">My LinkedIn</a>
+    const getExample = function () {
+      let hash = window.location.hash
+      let file = hash.replace("#", "");
+      let fileName = file == "" ? "basic.html" : file + ".html";
+      let fileUrl = "examples/" + fileName;
 
-  </footer>
+      const iframeNode = document.querySelector('#frame');
+      iframeNode.src = fileUrl;
 
+      const nameNode = document.querySelector("#name");
+      nameNode.innerHTML = '<a href="' + fileUrl + '">' + fileName + '</a>';
+      const fileNode = document.querySelector("#fileNode");
+      // fileNode.innerHTML = htmlfile + ".html"
 
+      async function getTxt() {
+        try {
+          let response = await fetch(fileUrl);
+          let content = await response.text();
+          fileNode.textContent = content;
+          console.log(content);
+          hljs.highlightBlock(fileNode);
+        }
+        catch (error) {
+          console.log('Loading error...', error);
+          fileNode.textContent = 'Loading error...';
+        }
+      }
+
+      getTxt();
+
+    }
+
+    window.onhashchange = function () { getExample(); }
+    getExample();
+
+  </script>
 </body>
-
-</html>
